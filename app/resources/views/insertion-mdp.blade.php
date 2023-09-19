@@ -4,6 +4,7 @@
     <title>Formulaire</title>
 </head>
 <body>
+    <h1>Insertion de mot de passe</h1>
     <form method="GET" action="{{ route('form.post') }}">
         @csrf
 

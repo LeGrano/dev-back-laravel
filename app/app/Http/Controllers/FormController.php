@@ -47,12 +47,25 @@ class FormController extends Controller
                 "email" => $email,
                 "password"=> $password
             ];
-            $directory = "../../../storage/app/json";
-            $filecount = count(glob($directory . "*"));
-            Storage::disk('local_json')->put(`password_$filecount.json`, json_encode($data));
-         
+            
+            $files = Storage::disk('local_json')->files();
+            $filecount = count($files);
 
-            // Redirigez l'utilisateur vers une autre page
+            $num = strval($filecount);
+
+            $filename = "password_$num.json"; 
+
+            Storage::disk('local_json')->put($filename, json_encode($data));
+         
+            $jsonData = [];
+
+            // Parcourir chaque fichier JSON et le décoder
+            foreach ($files as $file) {
+                $contents = Storage::disk('local_json')->get($file);
+                $jsonData[] = json_decode($contents, true);
+            }
+
+            Session::put('jsonData', $jsonData);
             return redirect('/page-verif'); 
         }
 
