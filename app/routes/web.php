@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\FormController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::view('/insertion-mdp', 'insertion-mdp');
+Route::view('/page-verif', 'page-verif');
+
+
+Route::get('/get', [FormController::class, 'getForm'])->name('form.post');
