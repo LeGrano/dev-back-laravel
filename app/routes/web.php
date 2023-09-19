@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::view('/insertion-mdp', 'insertion-mdp');
+Route::view('/insertion-mdp', 'insertion-mdp')->name('insertion-mdp');
 Route::view('/page-verif', 'page-verif');
 
 
