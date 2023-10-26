@@ -51,7 +51,7 @@ class User extends Authenticatable
     }
 
     
-    public function team(): BelongsToMany
+    public function teams(): BelongsToMany
     {
         return $this->BelongsToMany(Team::class);
     }

@@ -17,7 +17,7 @@ class teamController extends Controller
     function insertTeam(Request $request){
 
         $validator = Validator::make($request->all(), [
-            'team' => 'required|string|unique:team,name'
+            'team' => 'required|string|unique:teams,name'
         ]);
         if ($validator->fails()) {
             $errors = $validator->messages();
@@ -38,7 +38,7 @@ class teamController extends Controller
         
             $userId = Auth::user();
         
-            $userId->team()->syncWithoutDetaching([$team->id]);
+            $userId->teams()->syncWithoutDetaching([$team->id]);
           
 //Modifier model team en team sans s
 
