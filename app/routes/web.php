@@ -53,3 +53,5 @@ Route::get('/modif/{id}', [mdpModifController::class, 'formModifMdp'])->name('mo
 
 Route::get('/team',[teamController::class, 'insertTeam'])->name('insert-team-controller');
 Route::get('/liste-team',[teamController::class, 'listeTeam'])->name('liste-team-controller');
+Route::get('/join-team/{id}', [TeamController::class, 'joinTeam'])->name('joinTeam');
+Route::get('/leave-team/{id}', [TeamController::class, 'leaveTeam'])->name('leaveTeam');

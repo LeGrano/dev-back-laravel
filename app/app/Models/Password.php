@@ -9,8 +9,4 @@ class password extends Model
 {
 
     use HasFactory;
-
-
-   
-
 }
