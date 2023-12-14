@@ -7,6 +7,7 @@ use App\Http\Controllers\listeController;
 use App\Http\Controllers\mdpModifController;
 use App\Http\Controllers\teamController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -55,3 +56,4 @@ Route::get('/team',[teamController::class, 'insertTeam'])->name('insert-team-con
 Route::get('/liste-team',[teamController::class, 'listeTeam'])->name('liste-team-controller');
 Route::get('/join-team/{id}', [TeamController::class, 'joinTeam'])->name('joinTeam');
 Route::get('/leave-team/{id}', [TeamController::class, 'leaveTeam'])->name('leaveTeam');
+

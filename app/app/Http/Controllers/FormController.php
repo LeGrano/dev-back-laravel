@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Password;
 
+
 class FormController extends Controller
 {
    
@@ -17,7 +18,10 @@ class FormController extends Controller
         //verification des input
         $validator = Validator::make($request->all(), [
             'url' => 'required|string|url',
+
             'login' => 'required|string',
+
+
             'password' => 'required|string'
         ]);
 
@@ -25,6 +29,7 @@ class FormController extends Controller
             $errors = $validator->messages();
 
             $fields = ['url', 'login', 'password'];
+
         
             foreach ($fields as $field) {
                 if ($errors->has($field)) {
@@ -67,7 +72,7 @@ class FormController extends Controller
             $filename = "password_$num.json"; 
 
             Storage::disk('local_json')->put($filename, json_encode($data));
-         
+
             return redirect('/page-verif'); 
         }
     }
