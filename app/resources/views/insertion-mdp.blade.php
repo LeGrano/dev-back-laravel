@@ -5,6 +5,7 @@
 </head>
 <body>
     <h1>Insertion de mot de passe</h1>
+
     <form method="GET" action="{{ route('form.post') }}">
         @csrf
 
@@ -16,10 +17,11 @@
 
         <br>
 
-        <label for="email">Email :</label>
-        <input type="email" name="email" id="email" value="{{ old('email') }}" required>
-        @if(Session::has('email_error'))
-            <p class="error">{{ Session::get('email_error') }}</p>
+        <label for="login">login :</label>
+        <input type="login" name="login" id="login" value="{{ old('login') }}" required>
+        @if(Session::has('login_error'))
+            <p class="error">{{ Session::get('login_error') }}</p>
+
         @endif
 
         <br>

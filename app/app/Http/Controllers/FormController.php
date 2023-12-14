@@ -7,6 +7,8 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Password;
+
 
 class FormController extends Controller
 {
@@ -16,14 +18,18 @@ class FormController extends Controller
         //verification des input
         $validator = Validator::make($request->all(), [
             'url' => 'required|string|url',
-            'email' => 'required|string|email',
+
+            'login' => 'required|string',
+
+
             'password' => 'required|string'
         ]);
 
         if ($validator->fails()) {
             $errors = $validator->messages();
 
-            $fields = ['url', 'email', 'password'];
+            $fields = ['url', 'login', 'password'];
+
         
             foreach ($fields as $field) {
                 if ($errors->has($field)) {
@@ -39,12 +45,22 @@ class FormController extends Controller
 
 
             $url = $request->input('url');
-            $email = $request->input('email');
+            $login = $request->input('login');
             $password = $request->input('password');
-
+            //___________________________________
+            //_______INSERTION BDD PASSWORD______
+            //___________________________________
+            $passwordModel= new Password();
+            $passwordModel->site = $url;
+            $passwordModel->login = $login;
+            $passwordModel->password = $password;
+            $passwordModel->user_id = auth()->user()->id;
+            $passwordModel->save();
+            //________________________________
+           
             $data = [
                 "url" => $url,
-                "email" => $email,
+                "login" => $login,
                 "password"=> $password
             ];
             
@@ -56,23 +72,8 @@ class FormController extends Controller
             $filename = "password_$num.json"; 
 
             Storage::disk('local_json')->put($filename, json_encode($data));
-         
-            $jsonData = [];
 
-            // Parcourir chaque fichier JSON et le décoder
-            foreach ($files as $file) {
-                $contents = Storage::disk('local_json')->get($file);
-                $jsonData[] = json_decode($contents, true);
-            }
-
-            Session::put('jsonData', $jsonData);
             return redirect('/page-verif'); 
         }
-
-       
-
     }
-
-    
-
 }
