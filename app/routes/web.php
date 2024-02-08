@@ -57,3 +57,6 @@ Route::get('/team',[teamController::class, 'insertTeam'])->name('insert-team-con
 Route::get('/liste-team',[teamController::class, 'listeTeam'])->name('liste-team-controller');
 Route::get('/join-team/{id}', [TeamController::class, 'joinTeam'])->name('joinTeam');
 Route::get('/leave-team/{id}', [TeamController::class, 'leaveTeam'])->name('leaveTeam');
+Route::get('/manage-team/{id}', [teamController::class, 'goToManageTeam'])->name('manage-team');
+Route::get('/add-team-password', [teamController::class, 'addTeamPassword'])->name('add-team-password');
+Route::get('/add-users',[teamController::class, 'addUsers'])->name('addUsers');
