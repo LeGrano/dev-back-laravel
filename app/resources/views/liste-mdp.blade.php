@@ -49,7 +49,12 @@
                 @foreach (session('infos')[1] as $data)
 
                 <tr>
-                    <td class="py-2 text-center border-b border-gray-700">{{ $data->name }}</td>
+                    <td class="py-2 text-center border-b border-gray-700">{{ $data->name }}
+                    @if(in_array($data->id,  $usersTeams))
+                <a class="bg-gray-500 text-white px-2 py-1 rounded-full hover:bg-gray-700 hover:shadow" href="{{ route('manage-team', ['id' => $data->id]) }}">Gérer</a>
+            @endif
+
+                    </td>
                     <td class="py-2 text-center border-b border-gray-700">
                         {{ $data->users_count }}
                         @if(!in_array($data->id,  $usersTeams))
@@ -67,6 +72,21 @@
         </table>
 
     </div>
+        <div>
+            <h3 class="text-3xl font-bold mb-4 mt-16 text-center">Mots de passes par teams</h3>
+            <div class="flex justify-around">
+            @foreach (session('infos')[2] as $data)
+                <div class="card bg-gray-600 rounded-3xl px-4 py-6 divide-y divide-solid">
+                    <h4 class="font-bold text-lg">{{ $data['team']->name }}</h4>
+                    <div class="mdp-list">
+                        @foreach ($data['team']->passwords as $password)
+                            <p>- {{ $password->site }}</p>
+                        @endforeach
+                    </div>
+                </div>
+            @endforeach
+            </div>
+</div>
 </body>
 
 </html>

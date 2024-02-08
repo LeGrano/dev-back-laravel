@@ -6,7 +6,7 @@ use App\Http\Controllers\FormController;
 use App\Http\Controllers\listeController;
 use App\Http\Controllers\mdpModifController;
 use App\Http\Controllers\teamController;
-
+use App\Models\Team;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +44,7 @@ Route::view('/page-verif', 'page-verif');
 //__________TEAM_________________
 Route::view('/liste-team', 'liste-team')->name('liste-team');
 Route::view('/insertion-team', 'insertion-team')->name('insertion-team');
+Route::view('/team-manager', 'team-manager')->name('team-manager');
 
 //____________CONTROLLER_______________
 Route::get('/liste', [listeController::class, 'getInfos'])->name('liste');
@@ -56,4 +57,6 @@ Route::get('/team',[teamController::class, 'insertTeam'])->name('insert-team-con
 Route::get('/liste-team',[teamController::class, 'listeTeam'])->name('liste-team-controller');
 Route::get('/join-team/{id}', [TeamController::class, 'joinTeam'])->name('joinTeam');
 Route::get('/leave-team/{id}', [TeamController::class, 'leaveTeam'])->name('leaveTeam');
-
+Route::get('/manage-team/{id}', [teamController::class, 'goToManageTeam'])->name('manage-team');
+Route::get('/add-team-password', [teamController::class, 'addTeamPassword'])->name('add-team-password');
+Route::get('/add-users',[teamController::class, 'addUsers'])->name('addUsers');
