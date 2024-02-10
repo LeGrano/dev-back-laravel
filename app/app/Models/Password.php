@@ -14,4 +14,7 @@ class password extends Model
     {
         return $this->belongsToMany(Team::class, 'team_password');
     }
+    protected $casts = [
+        'password' => 'encrypted',
+    ];
 }

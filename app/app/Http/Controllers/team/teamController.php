@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\team;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
@@ -12,7 +13,7 @@ use App\Models\Team;
 use App\Models\User;
 use App\Notifications\JoinTeamNotif;
 use Illuminate\Support\Facades\Notification;
-use App\Http\Controllers\listeController;
+use App\Http\Controllers\Other\listeController;
 use App\Models\Password;
 
 

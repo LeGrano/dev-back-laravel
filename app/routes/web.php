@@ -2,10 +2,11 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\FormController;
-use App\Http\Controllers\listeController;
-use App\Http\Controllers\mdpModifController;
-use App\Http\Controllers\teamController;
+use App\Http\Controllers\Other\routesController;
+use App\Http\Controllers\password\FormController;
+use App\Http\Controllers\Other\listeController;
+use App\Http\Controllers\password\mdpModifController;
+use App\Http\Controllers\team\teamController;
 use App\Models\Team;
 
 /*
@@ -36,17 +37,18 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 //__________MDP_________________
-Route::view('/insertion-mdp', 'insertion-mdp')->name('insertion-mdp');
-Route::view('/liste-mdp', 'liste-mdp')->name('liste-mdp');
-Route::view('/modif-mdp/{id}', 'modif-mdp')->name('modif-mdp');
-Route::view('/page-verif', 'page-verif');
+
+Route::get('/insertion-mdp', [routesController::class, 'insertionMDP'])->name('insertion-mdp');
+Route::get('/liste-mdp', [routesController::class, 'listeMDP'])->name('liste-mdp');
+Route::get('/modif-mdp/{id}', [routesController::class, 'formModifMdp'])->name('modif-mdp');
+Route::get('/page-verif', [routesController::class, 'verifMdp'])->name('verif-mdp');
 
 //__________TEAM_________________
-Route::view('/liste-team', 'liste-team')->name('liste-team');
-Route::view('/insertion-team', 'insertion-team')->name('insertion-team');
-Route::view('/team-manager', 'team-manager')->name('team-manager');
+Route::get('/liste-team', [routesController::class, 'listeTeam'])->name('liste-team');
+Route::get('/insertion-team', [routesController::class, 'insertionTeam'])->name('insertion-team');
+Route::get('/team-manager', [routesController::class, 'manageTeam'])->name('team-manager');
 
-//____________CONTROLLER_______________
+
 Route::get('/liste', [listeController::class, 'getInfos'])->name('liste');
 Route::get('/get', [FormController::class, 'getForm'])->name('form.post');
 

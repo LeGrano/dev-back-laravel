@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Other;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use DB;
 use App\Http\Requests;
@@ -34,6 +35,7 @@ class listeController extends Controller
     {
         return Auth::user()->teams->pluck('id')->toArray();
     }
+    
     public function getTeamsPasswords()
     {
         $teams = Auth::user()->teams; // Récupère toutes les équipes de l'utilisateur
@@ -51,21 +53,29 @@ class listeController extends Controller
                 
                 $allData[] = ['id_password' => $id_password, 'id_team' => $id_team];
             }
-                $allDataWithDetails = [];
+        }
+        
+        $allDataWithDetails = [];
 
-                foreach ($allData as $data) {
-                    $id_password = $data['id_password'];
-                    $id_team = $data['id_team'];
+        foreach ($allData as $data) {
+            $id_password = $data['id_password'];
+            $id_team = $data['id_team'];
 
-                    $team = Team::find($id_team);
-                    $password = Password::find($id_password);
+            $team = Team::find($id_team);
+            $password = Password::find($id_password);
 
-                    $allDataWithDetails[] = [
-                        'team' => $team,
-                        'password' => $password,
-                    ];
-                }
-            } 
-            return $allDataWithDetails;
+            $allDataWithDetails[] = [
+                'team' => $team,
+                'password' => $password,
+            ];
+        }
+        
+        if (empty($allDataWithDetails)) {
+            return $allDataWithDetails[] = [];
+        }else{
+             return $allDataWithDetails;
+        }
+        
+       
     }
 }
